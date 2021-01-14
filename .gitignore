@@ -2,6 +2,7 @@
 output
 redis-5.0.8
 hiredis-1.0.0
+main
 
 #文件
 *.o
