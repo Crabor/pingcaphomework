@@ -15,8 +15,7 @@ void ThreadTransaction(void *ptr)
     //connect to server
     redisContext *conn;
     redisReply *reply;
-    struct timeval timeout = {1, 500000}; // 1.5 seconds
-    conn = redisConnectWithTimeout(hostname, port, timeout);
+    conn = redisConnect(hostname, port);
     if (conn == NULL || conn->err)
     {
         if (conn)
@@ -30,6 +29,7 @@ void ThreadTransaction(void *ptr)
         }
         exit(1);
     }
+
     //decr 5 keys
     for (int i = 0; i < 5; ++i)
     {
@@ -77,8 +77,7 @@ int main(int argc, char **argv)
     //connect to server
     redisContext *conn;
     redisReply *reply;
-    struct timeval timeout = {1, 500000}; // 1.5 seconds
-    conn = redisConnectWithTimeout(hostname, port, timeout);
+    conn = redisConnect(hostname, port);
     if (conn == NULL || conn->err)
     {
         if (conn)
