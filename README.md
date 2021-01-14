@@ -25,3 +25,7 @@ CentOS 7.5 64bit 2vCPUs 4GB 40GB 华为云服务器
 针对问题1，由于redis是单线程执行命令的，所以借助redis自带的INCR、DECR命令即可解决传统自增操作的线程安全问题。
 
 针对问题2，可以通过实现undo log,
+
+```bash
+gcc main.c -o main -I /usr/local/include/hiredis -lhiredis -lpthread -std=c99
+```

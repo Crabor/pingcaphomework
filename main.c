@@ -3,11 +3,9 @@
 #include <string.h>
 #include <hiredis.h>
 #include <pthread.h>
-#include <unistd.h>
 
 #define MAX_KEYNAME_LEN 5
 #define MAX_HOSTNAME_LEN 15
-#define atomic_dec(x) __sync_fetch_and_sub((x), 1)
 
 char hostname[MAX_HOSTNAME_LEN + 1];
 int port;
