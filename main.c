@@ -7,107 +7,140 @@
 
 #define MAX_KEYNAME_LEN 5
 #define MAX_HOSTNAME_LEN 15
+#define atomic_dec(x) __sync_fetch_and_sub((x), 1)
 
-typedef struct SERVER_INFO{
-    char hostname[MAX_HOSTNAME_LEN+1];
-    int port;
-}ServerInfo_t;
+char hostname[MAX_HOSTNAME_LEN + 1];
+int port;
 
-void ThreadTransaction(void *ptr){
-    pthread_detach(pthread_self());
-
+void ThreadTransaction(void *ptr)
+{
     //connect to server
-    ServerInfo_t server;
-    strcpy(server.hostname,((ServerInfo_t*)ptr)->hostname);
-    server.port = atoi(((ServerInfo_t*)ptr)->port);
     redisContext *conn;
     redisReply *reply;
     struct timeval timeout = {1, 500000}; // 1.5 seconds
-    conn = redisConnectWithTimeout(server.hostname, server.port, timeout);
-    if (conn == NULL || conn->err){
-        if (conn){
+    conn = redisConnectWithTimeout(hostname, port, timeout);
+    if (conn == NULL || conn->err)
+    {
+        if (conn)
+        {
             printf("Connection error: %s\n", conn->errstr);
             redisFree(conn);
-        }else{
+        }
+        else
+        {
             printf("Connection error: can't allocate redis context\n");
         }
         exit(1);
     }
-
     //decr 5 keys
-    for(int i=0;i<5;++i){
+    for (int i = 0; i < 5; ++i)
+    {
         //get random key
-        char keyname[MAX_KEYNAME_LEN+1];
-        reply = redisCommand(conn,"RANDOMKEY");
-        printf("KEY: %s\n", reply->str);
-        strcpy(keyname,reply->str);
+        char keyname[MAX_KEYNAME_LEN + 1];
+        reply = redisCommand(conn, "RANDOMKEY");
+        strcpy(keyname, reply->str);
         freeReplyObject(reply);
 
         //decrease key value
-        reply = redisCommand(conn,"DECR %s",keyname);
-        printf("DECR: %s\n", reply->str);
+        reply = redisCommand(conn, "DECR %s", keyname);
         freeReplyObject(reply);
     }
 
     //incr 5 keys
-    for(int i=0;i<5;++i){
+    for (int i = 0; i < 5; ++i)
+    {
         //get random key
-        char keyname[MAX_KEYNAME_LEN+1];
-        reply = redisCommand(conn,"RANDOMKEY");
-        printf("KEY: %s\n", reply->str);
-        strcpy(keyname,reply->str);
+        char keyname[MAX_KEYNAME_LEN + 1];
+        reply = redisCommand(conn, "RANDOMKEY");
+        strcpy(keyname, reply->str);
         freeReplyObject(reply);
 
         //increase key value
-        reply = redisCommand(conn,"INCR %s",keyname);
-        printf("INCR: %s\n", reply->str);
+        reply = redisCommand(conn, "INCR %s", keyname);
         freeReplyObject(reply);
     }
 
     redisFree(conn);
-    pthread_exit(0) ;
 }
 
-int main(int argc, char **argv){
-    if (argc < 4){
+int main(int argc, char **argv)
+{
+    if (argc < 4)
+    {
         printf("Usage: example {instance_ip_address} {instance_port} {thread number}\n");
         exit(0);
     }
-    //set hostname & port
-    ServerInfo_t server;
-    strcpy(server.hostname,argv[1]);
-    server.port = atoi(argv[2]);
+
+    //set hostname & port & threadnum
+    strcpy(hostname, argv[1]);
+    port = atoi(argv[2]);
     int threadnum = atoi(argv[3]);
+
     //connect to server
     redisContext *conn;
     redisReply *reply;
     struct timeval timeout = {1, 500000}; // 1.5 seconds
-    conn = redisConnectWithTimeout(server.hostname, server.port, timeout);
-    if (conn == NULL || conn->err){
-        if (conn){
+    conn = redisConnectWithTimeout(hostname, port, timeout);
+    if (conn == NULL || conn->err)
+    {
+        if (conn)
+        {
             printf("Connection error: %s\n", conn->errstr);
             redisFree(conn);
-        }else{
+        }
+        else
+        {
             printf("Connection error: can't allocate redis context\n");
         }
         exit(1);
     }
+
     //set 1000 keys
-    for(int i=0;i<10;++i){
-        reply=redisCommand(conn,"SET %d 0",i);
+    for (int i = 0; i < 1000; ++i)
+    {
+        reply = redisCommand(conn, "SET %d 0", i);
         freeReplyObject(reply);
     }
-    redisFree(conn);
 
     //create many threads, one thread equal one transaction
-    pthread_t tid;
-    for(int i=0;i<threadnum;++i){
-        if(pthread_create(&tid,NULL,ThreadTransaction,&server) != 0){
-            printf ("Create pthread error!/n");
-            exit (1);
+    pthread_t *tid = (pthread_t *)malloc(threadnum * sizeof(pthread_t));
+    if (!tid)
+    {
+        printf("malloc tid failed!\n");
+        exit(1);
+    }
+    for (int i = 0; i < threadnum; ++i)
+    {
+        if (pthread_create(&tid[i], NULL, ThreadTransaction, NULL) != 0)
+        {
+            printf("Create pthread error!/n");
+            exit(1);
         }
     }
-    sleep(2);
 
+    //wait all threads
+    for (int i = 0; i < threadnum; ++i)
+    {
+        pthread_join(tid[i], NULL);
+    }
+
+    //check if all keys' sum equal 0
+    long long sum = 0;
+    for (int i = 0; i < 1000; ++i)
+    {
+        reply = redisCommand(conn, "GET %d", i);
+        sum += reply->integer;
+        freeReplyObject(reply);
+    }
+    if (sum == 0)
+    {
+        printf("Congratulation!\n");
+    }
+    else
+    {
+        printf("Oops!\n");
+    }
+
+    redisFree(conn);
     return 0;
 }
