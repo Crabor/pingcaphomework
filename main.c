@@ -114,7 +114,7 @@ int main(int argc, char **argv)
     {
         if (pthread_create(&tid[i], NULL, ThreadTransaction, NULL) != 0)
         {
-            printf("Create pthread error!\n");
+            printf("Create pthread %i error!\n",i);
             exit(1);
         }
     }
