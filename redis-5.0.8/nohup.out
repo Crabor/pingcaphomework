@@ -357,3 +357,8 @@ Bad directive or wrong number of arguments
 21646:C 15 Jan 2021 13:01:21.085 * DB saved on disk
 21646:C 15 Jan 2021 13:01:21.087 * RDB: 0 MB of memory used by copy-on-write
 19358:M 15 Jan 2021 13:01:21.177 * Background saving terminated with success
+19358:M 15 Jan 2021 13:14:01.484 * 10 changes in 300 seconds. Saving...
+19358:M 15 Jan 2021 13:14:01.487 * Background saving started by pid 26374
+26374:C 15 Jan 2021 13:14:01.493 * DB saved on disk
+26374:C 15 Jan 2021 13:14:01.497 * RDB: 0 MB of memory used by copy-on-write
+19358:M 15 Jan 2021 13:14:01.588 * Background saving terminated with success

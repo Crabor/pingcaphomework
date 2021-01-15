@@ -67,6 +67,9 @@ nohup redis-server redis.conf &
 sudo sysctl -w net.ipv4.tcp_tw_recycle=1
 sudo sysctl -w net.ipv4.tcp_tw_reuse=1
 
+#查看系统可生成最大线程数，不建议修改，根据此值来设置最大事务线程数量。本机值是30148
+cat /proc/sys/kernel/threads-max
+
 #运行程序,线程数自己设定，这里设定10000
 cd ..
 ./main 127.0.0.1 6379 10000
