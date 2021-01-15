@@ -63,6 +63,10 @@ gcc main.c -o main -I /usr/local/include/hiredis -lhiredis -lpthread -std=c99
 cd redis-5.0.8
 nohup redis-server redis.conf &
 
+#解决socket客户端端口快速用尽出现“Cannot assign requested address”错误，修改tcp/ip协议配置，快速回收socket资源，默认为0，修改为1；并允许端口重用
+sudo sysctl -w net.ipv4.tcp_tw_recycle=1
+sudo sysctl -w net.ipv4.tcp_tw_reuse=1
+
 #运行程序,线程数自己设定，这里设定10000
 cd ..
 ./main 127.0.0.1 6379 10000
@@ -70,13 +74,19 @@ cd ..
 
 ## 运行结果
 
-受限于机器本身性能问题，同时运行25000左右个事务时不会出错，28000个事务时便出现内存不足问题。理论上内存足够的话可以解决此问题。
+受限于机器本身性能问题，当事务线程数量达到30000时，出现线程创建失败问题。
 
 ```bash
 [root@ecs-7e58 pingcap]# ./main 127.0.0.1 6379 25000
 Congratulation!
+[root@ecs-7e58 pingcap]# ./main 127.0.0.1 6379 26000
+Congratulation!
 [root@ecs-7e58 pingcap]# ./main 127.0.0.1 6379 27000
 Congratulation!
 [root@ecs-7e58 pingcap]# ./main 127.0.0.1 6379 28000
-Connection error: Cannot assign requested address
+Congratulation!
+[root@ecs-7e58 pingcap]# ./main 127.0.0.1 6379 29000
+Congratulation!
+[root@ecs-7e58 pingcap]# ./main 127.0.0.1 6379 30000
+Create pthread error!
 ```

@@ -302,3 +302,48 @@ Bad directive or wrong number of arguments
 673:C 15 Jan 2021 12:34:25.025 * DB saved on disk
 673:C 15 Jan 2021 12:34:25.030 * RDB: 0 MB of memory used by copy-on-write
 19358:M 15 Jan 2021 12:34:25.121 * Background saving terminated with success
+19358:M 15 Jan 2021 12:42:26.749 * 10 changes in 300 seconds. Saving...
+19358:M 15 Jan 2021 12:42:26.752 * Background saving started by pid 3457
+3457:C 15 Jan 2021 12:42:26.756 * DB saved on disk
+3457:C 15 Jan 2021 12:42:26.759 * RDB: 0 MB of memory used by copy-on-write
+19358:M 15 Jan 2021 12:42:26.852 * Background saving terminated with success
+19358:M 15 Jan 2021 12:43:27.004 * 10000 changes in 60 seconds. Saving...
+19358:M 15 Jan 2021 12:43:27.008 * Background saving started by pid 30329
+30329:C 15 Jan 2021 12:43:27.014 * DB saved on disk
+30329:C 15 Jan 2021 12:43:27.017 * RDB: 0 MB of memory used by copy-on-write
+19358:M 15 Jan 2021 12:43:27.108 * Background saving terminated with success
+19358:M 15 Jan 2021 12:44:56.656 * 10000 changes in 60 seconds. Saving...
+19358:M 15 Jan 2021 12:44:56.662 * Background saving started by pid 22552
+22552:C 15 Jan 2021 12:44:56.699 * DB saved on disk
+22552:C 15 Jan 2021 12:44:56.710 * RDB: 5 MB of memory used by copy-on-write
+19358:M 15 Jan 2021 12:44:56.739 * Background saving terminated with success
+19358:M 15 Jan 2021 12:45:57.082 * 10000 changes in 60 seconds. Saving...
+19358:M 15 Jan 2021 12:45:57.085 * Background saving started by pid 18426
+18426:C 15 Jan 2021 12:45:57.089 * DB saved on disk
+18426:C 15 Jan 2021 12:45:57.092 * RDB: 0 MB of memory used by copy-on-write
+19358:M 15 Jan 2021 12:45:57.186 * Background saving terminated with success
+19358:M 15 Jan 2021 12:46:58.020 * 10000 changes in 60 seconds. Saving...
+19358:M 15 Jan 2021 12:46:58.027 * Background saving started by pid 15301
+15301:C 15 Jan 2021 12:46:58.031 * DB saved on disk
+15301:C 15 Jan 2021 12:46:58.036 * RDB: 0 MB of memory used by copy-on-write
+19358:M 15 Jan 2021 12:46:58.128 * Background saving terminated with success
+19358:M 15 Jan 2021 12:47:59.092 * 10000 changes in 60 seconds. Saving...
+19358:M 15 Jan 2021 12:47:59.095 * Background saving started by pid 9845
+9845:C 15 Jan 2021 12:47:59.099 * DB saved on disk
+9845:C 15 Jan 2021 12:47:59.102 * RDB: 0 MB of memory used by copy-on-write
+19358:M 15 Jan 2021 12:47:59.196 * Background saving terminated with success
+19358:M 15 Jan 2021 12:49:00.037 * 10000 changes in 60 seconds. Saving...
+19358:M 15 Jan 2021 12:49:00.040 * Background saving started by pid 2722
+2722:C 15 Jan 2021 12:49:00.044 * DB saved on disk
+2722:C 15 Jan 2021 12:49:00.047 * RDB: 0 MB of memory used by copy-on-write
+19358:M 15 Jan 2021 12:49:00.141 * Background saving terminated with success
+19358:M 15 Jan 2021 12:50:18.814 * 10000 changes in 60 seconds. Saving...
+19358:M 15 Jan 2021 12:50:18.819 * Background saving started by pid 29056
+29056:C 15 Jan 2021 12:50:18.831 * DB saved on disk
+29056:C 15 Jan 2021 12:50:18.835 * RDB: 2 MB of memory used by copy-on-write
+19358:M 15 Jan 2021 12:50:18.848 * Background saving terminated with success
+19358:M 15 Jan 2021 12:51:19.012 * 10000 changes in 60 seconds. Saving...
+19358:M 15 Jan 2021 12:51:19.016 * Background saving started by pid 26909
+26909:C 15 Jan 2021 12:51:19.027 * DB saved on disk
+26909:C 15 Jan 2021 12:51:19.030 * RDB: 0 MB of memory used by copy-on-write
+19358:M 15 Jan 2021 12:51:19.116 * Background saving terminated with success
