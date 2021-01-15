@@ -28,7 +28,7 @@ hiredis版本（redis的C语言客户端）：v1.0.0
 
 针对问题1，传统做法是采用乐观锁或者悲观锁的形式保证单个变量操作的原子性。然而在这里，悲观锁容易产生``额外资源开销及死锁``问题（如两事务一个先获取keya再获取keyb，另一个则相反）；乐观锁的话，因为本题存在高并发问题，所以容易产生``循环时间开销大、ABA``问题。
 
-这里便体现出使用redis的优势了。Redis的多线程部分只是用来处理网络数据的读写和协议解析，执行命令仍然是单线程顺序执行，所以天然各命令本身具有隔离性。然而，``get``和``set``仍是两条命令，原子性难以保证。不过幸好redis支持``INCR、DECR``能原子性地对key进行自增、自减操作，所以线程安全问题终得以解决。
+这里便体现出使用redis的优势了。Redis的多线程部分只是用来处理网络数据的读写和协议解析，执行命令仍然是单线程顺序执行，所以天然各命令本身具有原子性。然而，``get``和``set``仍是两条命令，原子性难以保证。不过幸好redis支持``INCR、DECR``能原子性地对key进行自增、自减操作，所以线程安全问题终得以解决。
 
 针对问题2（``由于时间、机器性能、自身能力因素，暂未实现``），可以通过实现undo log, undo log不是顺序记录事务已执行的命令，而是记录每条命令的逻辑相反命令，如事务执行自增那undo log则记录一条自减的操作。当事务意外中断时，将记录的undo log作为一个新的事务线程加入执行。
 
@@ -39,7 +39,31 @@ hiredis版本（redis的C语言客户端）：v1.0.0
 ## 如何运行
 
 
-
 ```bash
+#编译redis
+cd redis-5.0.8
+make
+sudo make install
+
+#编译hiredis
+cd ../hiredis-1.0.0
+make
+sudo make install
+
+#解决“error while loading shared libraries: libhiredis.so.0.10: cannot open shared object file: No such file or directory”问题
+sudo ldconfig
+
+#编译主程序
+cd ..
 gcc main.c -o main -I /usr/local/include/hiredis -lhiredis -lpthread -std=c99
+
+#修改redis.conf里的maxclients,默认只能连接10000个客户端，这里自己已修改为1000000
+
+#启动redis服务器
+cd redis-5.0.8
+nohup redis-server redis.conf &
+
+#运行程序,线程数自己设定，这里设定10000
+cd ..
+./main 127.0.0.1 6379 10000
 ```
