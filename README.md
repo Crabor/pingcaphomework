@@ -67,3 +67,16 @@ nohup redis-server redis.conf &
 cd ..
 ./main 127.0.0.1 6379 10000
 ```
+
+## 运行结果
+
+受限于机器本身性能问题，同时运行25000左右个事务时不会出错，28000个事务时便出现内存不足问题。理论上内存足够的话可以解决此问题。
+
+```bash
+[root@ecs-7e58 pingcap]# ./main 127.0.0.1 6379 25000
+Congratulation!
+[root@ecs-7e58 pingcap]# ./main 127.0.0.1 6379 27000
+Congratulation!
+[root@ecs-7e58 pingcap]# ./main 127.0.0.1 6379 28000
+Connection error: Cannot assign requested address
+```

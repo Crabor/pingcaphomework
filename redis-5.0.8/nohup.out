@@ -282,3 +282,23 @@ Bad directive or wrong number of arguments
 27427:C 15 Jan 2021 10:15:22.054 * DB saved on disk
 27427:C 15 Jan 2021 10:15:22.056 * RDB: 0 MB of memory used by copy-on-write
 19358:M 15 Jan 2021 10:15:22.150 * Background saving terminated with success
+19358:M 15 Jan 2021 12:31:08.948 * 1 changes in 900 seconds. Saving...
+19358:M 15 Jan 2021 12:31:08.950 * Background saving started by pid 20055
+20055:C 15 Jan 2021 12:31:08.967 * DB saved on disk
+20055:C 15 Jan 2021 12:31:08.971 * RDB: 0 MB of memory used by copy-on-write
+19358:M 15 Jan 2021 12:31:09.051 * Background saving terminated with success
+19358:M 15 Jan 2021 12:32:10.095 * 10000 changes in 60 seconds. Saving...
+19358:M 15 Jan 2021 12:32:10.101 * Background saving started by pid 9825
+9825:C 15 Jan 2021 12:32:10.104 * DB saved on disk
+9825:C 15 Jan 2021 12:32:10.109 * RDB: 0 MB of memory used by copy-on-write
+19358:M 15 Jan 2021 12:32:10.201 * Background saving terminated with success
+19358:M 15 Jan 2021 12:33:24.258 * 10000 changes in 60 seconds. Saving...
+19358:M 15 Jan 2021 12:33:24.264 * Background saving started by pid 4812
+4812:C 15 Jan 2021 12:33:24.273 * DB saved on disk
+4812:C 15 Jan 2021 12:33:24.277 * RDB: 2 MB of memory used by copy-on-write
+19358:M 15 Jan 2021 12:33:24.292 * Background saving terminated with success
+19358:M 15 Jan 2021 12:34:25.014 * 10000 changes in 60 seconds. Saving...
+19358:M 15 Jan 2021 12:34:25.021 * Background saving started by pid 673
+673:C 15 Jan 2021 12:34:25.025 * DB saved on disk
+673:C 15 Jan 2021 12:34:25.030 * RDB: 0 MB of memory used by copy-on-write
+19358:M 15 Jan 2021 12:34:25.121 * Background saving terminated with success
