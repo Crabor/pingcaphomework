@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <hiredis.h>
 #include <pthread.h>
 
@@ -12,6 +13,9 @@ int port;
 
 void ThreadTransaction(void *ptr)
 {
+    //delay
+    sleep(1);
+
     //connect to server
     redisContext *conn;
     redisReply *reply;
@@ -65,7 +69,7 @@ int main(int argc, char **argv)
 {
     if (argc < 4)
     {
-        printf("Usage: example {instance_ip_address} {instance_port} {thread number}\n");
+        printf("Usage: example {instance_ip_address} {instance_port} {thread_number}\n");
         exit(0);
     }
 
@@ -99,7 +103,7 @@ int main(int argc, char **argv)
         freeReplyObject(reply);
     }
 
-    //create many threads, one thread equal one transaction
+    //create many threads, one thread equal to one transaction
     pthread_t *tid = (pthread_t *)malloc(threadnum * sizeof(pthread_t));
     if (!tid)
     {
@@ -110,7 +114,7 @@ int main(int argc, char **argv)
     {
         if (pthread_create(&tid[i], NULL, ThreadTransaction, NULL) != 0)
         {
-            printf("Create pthread error!/n");
+            printf("Create pthread error!\n");
             exit(1);
         }
     }
@@ -121,7 +125,7 @@ int main(int argc, char **argv)
         pthread_join(tid[i], NULL);
     }
 
-    //check if all keys' sum equal 0
+    //check if all keys' sum equal to 0
     long long sum = 0;
     for (int i = 0; i < 1000; ++i)
     {
