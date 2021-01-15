@@ -16,7 +16,6 @@ redis-cli
 redis-benchmark 
 redis-check-rdb 
 redis-check-aof 
-*.o 
 *.gcda 
 *.gcno 
 *.gcov 
