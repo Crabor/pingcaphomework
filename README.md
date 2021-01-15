@@ -88,5 +88,5 @@ Congratulation!
 [root@ecs-7e58 pingcap]# ./main 127.0.0.1 6379 29000
 Congratulation!
 [root@ecs-7e58 pingcap]# ./main 127.0.0.1 6379 30000
-Create pthread error!
+Create pthread 29917 error
 ```
