@@ -1,10 +1,7 @@
 #目录
-output
-redis-5.0.8
-hiredis-1.0.0
-main
 
 #文件
+main
 *.o
 *.obj
 *.elf
@@ -13,3 +10,24 @@ main
 *.exe
 *.rar
 *.gz
+redis-server 
+redis-sentinel 
+redis-cli 
+redis-benchmark 
+redis-check-rdb 
+redis-check-aof 
+*.o 
+*.gcda 
+*.gcno 
+*.gcov 
+redis.info 
+lcov-html 
+Makefile.dep 
+dict-benchmark
+libhiredis.so 
+libhiredis.a 
+libhiredis_ssl.so 
+libhiredis_ssl.a 
+hiredis-test 
+hiredis.pc 
+examples/hiredis-example*
