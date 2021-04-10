@@ -34,7 +34,7 @@ hiredis版本（redis的C语言客户端）：v1.0.0
 
 程序执行流程图：
 
-[Snipaste_2021-01-15_11-19-54.jpg](https://i.loli.net/2021/01/15/4Ii6YFvEC8yBMPD.jpg)
+![Snipaste_2021-01-15_11-19-54.jpg](https://i.loli.net/2021/01/15/4Ii6YFvEC8yBMPD.jpg)
 
 ## 如何运行
 
