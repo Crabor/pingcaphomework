@@ -96,3 +96,9 @@ Congratulation!
 [root@ecs-7e58 pingcap]# ./main 127.0.0.1 6379 30000
 Create pthread 29917 error
 ```
+
+## 考官评语
+
+存储部分选择 redis，简单易用，没什么问题。事务部分的设计几乎为 0，只是使用了 redis 的 inc、decr 命令保证 get/put 之间的原子性，但是事务的原子性、一致性、隔离性都没有保障，仅保障了最终一致性。
+
+果然一天速成的工程还是欠考虑😑，希望下次自己认真点~
